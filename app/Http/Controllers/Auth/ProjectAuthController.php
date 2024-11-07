@@ -52,8 +52,6 @@ class ProjectAuthController extends Controller
             return response()->json(['token' => $token]);
         }
 
-        return response()->json([
-            'error' => 'Invalid credentials',
-        ]);
+        return response()->json(['error' => 'Invalid credentials']);
     }
 }

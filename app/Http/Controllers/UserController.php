@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\DeleteUserJob;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,12 +25,8 @@ class UserController extends Controller
 
     public function destroy(int $id)
     {
-        if ($user = User::find($id)) {
-            $user->delete();
+        DeleteUserJob::dispatch($id);
 
-            return response()->json(['message' => 'User deleted successfully']);
-        }
-
-        return response()->json(['message' => 'User not found']);
+        return response()->json(['message' => 'User deletion is queued']);
     }
 }
